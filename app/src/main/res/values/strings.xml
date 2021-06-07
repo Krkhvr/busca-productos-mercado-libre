@@ -1,3 +1,33 @@
 <resources>
     <string name="app_name">Busca Mercado</string>
+    <string name="fav_name">Favoritos</string>
+    <string name="product_details_name">Producto</string>
+
+    <!--MainActivity-->
+    <string name="description_label">Producto:</string>
+
+    <!--Fragment Main-->
+    <string name="no_products">Lista vacía</string>
+
+    <!--ProductDetailFragment-->
+    <string name="id_label">Id: </string>
+    <string name="status_label">Estatus: </string>
+    <string name="domain_label">Dominio: </string>
+    <string name="features_label">Características</string>
+
+    <!--Menu-->
+    <string name="search_description">Search</string>
+    <string name="fav_description">Fav</string>
+    <string name="search_hint">Buscar un producto</string>
+
+    <!--Navigation Drawer-->
+    <string name="nav_header_description">Header</string>
+    <string name="nav_header_title">Marco Antonio Chacón Jiménez</string>
+    <string name="nav_header_subtitle">ingmrko@gmail.com</string>
+    <string name="home_nav">Inicio</string>
+    <string name="settings_nav">Configuración</string>
+    <string name="products_nav">Productos</string>
+    <string name="options_nav">Opciones</string>
+    <string name="fav_nav">Favoritos</string>
+
 </resources>

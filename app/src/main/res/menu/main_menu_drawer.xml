@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/home"
+            android:icon="@drawable/ic_home"
+            android:title="@string/home_nav" />
+
+        <item android:id="@+id/settings"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/settings_nav" />
+
+        <item android:id="@+id/products"
+            android:icon="@drawable/ic_shipping"
+            android:title="@string/products_nav" />
+    </group>
+
+
+    <item android:title="@string/options_nav">
+
+        <menu>
+            <item android:id="@+id/favFragment"
+                android:icon="@drawable/ic_favorite_border"
+                android:title="@string/fav_nav" />
+        </menu>
+    </item>
+
+</menu>
