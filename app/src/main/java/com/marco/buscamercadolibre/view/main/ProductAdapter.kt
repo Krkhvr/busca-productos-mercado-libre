@@ -1,14 +1,15 @@
 package com.marco.buscamercadolibre.view.main
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.marco.buscamercadolibre.databinding.CustomItemProductBinding
 import com.marco.buscamercadolibre.model.product.ProductModel
 import com.squareup.picasso.Picasso
 
+/**
+ * Clase Adapter para crear una lista personalizada de productos
+ */
 class ProductAdapter(private var productsList:List<ProductModel>, private val onProductClickListener: OnProductClickListener): RecyclerView.Adapter<ProductAdapter.ProductHolder>() {
 
     private val TAG = "ProductAdapter"

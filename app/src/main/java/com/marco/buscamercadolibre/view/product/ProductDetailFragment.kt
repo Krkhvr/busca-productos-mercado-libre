@@ -14,6 +14,9 @@ import com.marco.buscamercadolibre.model.product.PictureModel
 import com.marco.buscamercadolibre.model.product.ProductModel
 import com.marco.buscamercadolibre.viewmodel.SharedViewModel
 
+/**
+ * Fragment que muestra los detalles de un producto seleccionado
+ */
 class ProductDetailFragment : Fragment() {
 
     private var _binding: FragmentProductDetailBinding? = null
@@ -38,7 +41,7 @@ class ProductDetailFragment : Fragment() {
     }
 
     /**
-     * Fragment settings
+     * Configuraciones iniciales del fragment
      */
     private fun init(){
         //Adapter
@@ -53,7 +56,7 @@ class ProductDetailFragment : Fragment() {
     }
 
     /**
-     * Draw the product details
+     * Muestra los detalles del producto en pantalla
      */
     private fun drawProduct(product:ProductModel){
         binding.textViewName.text = product.name
@@ -67,6 +70,11 @@ class ProductDetailFragment : Fragment() {
         adapter.notifyDataSetChanged()
     }
 
+    /**
+     * Construye una lista de atributos de un producto para poder mostrarlos en pantalla en un solo [TextView]
+     * @param attributeModel Lista de atributos del producto
+     * @return Devueve una cadena concatenada con todos los atributos del producto
+     */
     private fun getFeatures(attributeModel: List<AttributeModel>): String{
         var features = ""
         attributeModel.forEach {

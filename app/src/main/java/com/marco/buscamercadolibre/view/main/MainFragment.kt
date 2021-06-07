@@ -15,7 +15,9 @@ import com.marco.buscamercadolibre.model.product.ProductModel
 import com.marco.buscamercadolibre.viewmodel.ProductViewModel
 import com.marco.buscamercadolibre.viewmodel.SharedViewModel
 
-
+/**
+ * Fragment principal de la aplicación, se encarga de mostrar la lista de productos para una nueva búsqueda
+ */
 class MainFragment : Fragment(), OnProductClickListener {
 
     private var _binding: FragmentMainBinding? = null
@@ -48,7 +50,7 @@ class MainFragment : Fragment(), OnProductClickListener {
     }
 
     /**
-     * Fragment configuration
+     * Configuración inicial del fragment
      */
     private fun init(){
         //Adapter
@@ -66,25 +68,34 @@ class MainFragment : Fragment(), OnProductClickListener {
         })
 
         productViewModel.pbLiveData.observe(viewLifecycleOwner, {
-            if(it){
-                products.clear()
-                adapter.notifyDataSetChanged()
-                binding.textViewNoProducts.isVisible = false
-            }
-            binding.progressBar.isVisible = it
+            showPB(it)
         })
     }
 
     /**
-     * Draw the product list in fragment
+     * Pinta la lista de productos en pantalla
+     * @param productList Lista de productos que serán mostrados en la lista
      */
-    private fun drawList(it: List<ProductModel>){
-        if (it.isEmpty()){
+    private fun drawList(productList: List<ProductModel>){
+        if (productList.isEmpty()){
             binding.textViewNoProducts.isVisible = true
         }else{
             binding.textViewNoProducts.isVisible = false
-            products.addAll(it)
+            products.addAll(productList)
             adapter.notifyDataSetChanged()
         }
+    }
+
+    /**
+     * Muestra u oculta la barra de progreso en pantalla
+     * @param visible Determina si será visible o no el ProgressBar
+     */
+    private fun showPB(visible: Boolean){
+        if(visible){
+            products.clear()
+            adapter.notifyDataSetChanged()
+            binding.textViewNoProducts.isVisible = false
+        }
+        binding.progressBar.isVisible = visible
     }
 }

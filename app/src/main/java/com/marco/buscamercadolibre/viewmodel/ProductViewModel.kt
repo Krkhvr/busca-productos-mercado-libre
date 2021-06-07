@@ -9,6 +9,9 @@ import com.marco.buscamercadolibre.repository.ProductProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
+/**
+ * Clase ViewModal para la búsqueda de productos
+ */
 class ProductViewModel: ViewModel() {
 
     val productLiveData = MutableLiveData<ResultModel>()
@@ -16,6 +19,9 @@ class ProductViewModel: ViewModel() {
 
     private val productProvider = ProductProvider()
 
+    /**
+     * Inicia una petición de búsqueda de productos, la clase [ProductProvider] determina el destino
+     */
     fun searchProducts(query:String){
         viewModelScope.launch {
             pbLiveData.postValue(true)

@@ -2,6 +2,9 @@ package com.marco.buscamercadolibre.model.product
 
 import com.google.gson.annotations.SerializedName
 
+/**
+ * Propiedades de un producto
+ */
 data class ProductModel(
     @SerializedName("id")
     val id: String,
