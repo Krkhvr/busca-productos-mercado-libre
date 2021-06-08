@@ -7,11 +7,13 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.*
 import com.marco.buscamercadolibre.R
+import com.marco.buscamercadolibre.common.Utility
 import com.marco.buscamercadolibre.databinding.ActivityMainBinding
 import com.marco.buscamercadolibre.viewmodel.ProductViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,10 +50,14 @@ class MainActivity : AppCompatActivity() {
     private fun intentHandler(intent: Intent?) {
         intent?.let {
             if (Intent.ACTION_SEARCH == intent.action) {
-                val query = intent.getStringExtra(SearchManager.QUERY)
-                query?.let{
-                    binding.activityMenuMain.toolbar.collapseActionView()
-                    productViewModel.searchProducts(query)
+                if(!Utility.isNetworkConnected(this)){
+                    Toast.makeText(this, R.string.no_internet_message, Toast.LENGTH_SHORT).show()
+                }else{
+                    val query = intent.getStringExtra(SearchManager.QUERY)
+                    query?.let{
+                        binding.activityMenuMain.toolbar.collapseActionView()
+                        productViewModel.searchProducts(query)
+                    }
                 }
             }
         }
@@ -96,10 +102,8 @@ class MainActivity : AppCompatActivity() {
 
 
 //TODO Pruebas unitarias
-//TODO Revisar estatus de conexión a internet
 //TODO Ocultar barra de bpusqueda en fragments heredados
 //TODO Borrar texto de buscador
-//TODO Bug al rotar dispositivo se vuelve a pintar la lista cuando ya se boró previaente
 //TODO Mejorar comportamiento de SearchView
 
 

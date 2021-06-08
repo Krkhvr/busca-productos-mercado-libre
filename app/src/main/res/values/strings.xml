@@ -5,8 +5,9 @@
 
     <!--MainActivity-->
     <string name="description_label">Producto:</string>
+    <string name="no_internet_message">El dispositivo no está conectado a la red</string>
 
-    <!--Fragment Main-->
+    <!--MainFragment-->
     <string name="no_products">Lista vacía</string>
 
     <!--ProductDetailFragment-->
@@ -14,6 +15,9 @@
     <string name="status_label">Estatus: </string>
     <string name="domain_label">Dominio: </string>
     <string name="features_label">Características</string>
+
+    <!--FavFragment-->
+    <string name="no_favs">Sin favoritos</string>
 
     <!--Menu-->
     <string name="search_description">Search</string>
