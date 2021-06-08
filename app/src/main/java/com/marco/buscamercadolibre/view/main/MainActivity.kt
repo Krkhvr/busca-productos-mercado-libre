@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.main_menu, menu)
+        menuInflater.inflate(R.menu.menu_main, menu)
 
         //Configuración de ViewSearch para la búsqueda de productos desde el toobar
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
@@ -94,12 +94,18 @@ class MainActivity : AppCompatActivity() {
 }
 
 
-//TODO Implementar ROM
-//TODO Implementar caché
+
 //TODO Pruebas unitarias
+//TODO Revisar estatus de conexión a internet
+//TODO Ocultar barra de bpusqueda en fragments heredados
+//TODO Borrar texto de buscador
+//TODO Bug al rotar dispositivo se vuelve a pintar la lista cuando ya se boró previaente
+//TODO Mejorar comportamiento de SearchView
 
 
 //TODO Implementar boton de fav
 //TODO Funcionalidad de lista de favs (Agregar otro Fragment)
 //TODO Compartir producto
+//TODO Implementar ROM
+//TODO Implementar caché
 

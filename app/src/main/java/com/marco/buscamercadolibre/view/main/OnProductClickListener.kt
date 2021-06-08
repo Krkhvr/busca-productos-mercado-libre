@@ -1,6 +1,5 @@
 package com.marco.buscamercadolibre.view.main
 
-import androidx.navigation.NavController
 import com.marco.buscamercadolibre.model.product.ProductModel
 
 /**

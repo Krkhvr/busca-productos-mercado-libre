@@ -7,8 +7,6 @@ import javax.inject.Inject
  */
 class ProductApiService @Inject constructor(private val productApiClient: ProductApiClient){
 
-    private val TAG = "ProductApiService"
-
     /**
      * Busca productos de acuerdo con la cadena recibida
      * @param product Indica el elemento por el cual se desea realizar la búsqueda

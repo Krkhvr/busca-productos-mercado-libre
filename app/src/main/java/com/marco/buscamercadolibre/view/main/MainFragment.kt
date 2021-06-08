@@ -14,12 +14,10 @@ import com.marco.buscamercadolibre.databinding.FragmentMainBinding
 import com.marco.buscamercadolibre.model.product.ProductModel
 import com.marco.buscamercadolibre.viewmodel.ProductViewModel
 import com.marco.buscamercadolibre.viewmodel.SharedViewModel
-import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * Fragment principal de la aplicación, se encarga de mostrar la lista de productos para una nueva búsqueda
  */
-@AndroidEntryPoint
 class MainFragment: Fragment(), OnProductClickListener {
 
     private var _binding: FragmentMainBinding? = null
@@ -63,6 +61,10 @@ class MainFragment: Fragment(), OnProductClickListener {
         else
             binding.recyclerView.layoutManager = StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL)
         binding.recyclerView.adapter = adapter
+
+        binding.floatingButton.setOnClickListener{
+            drawList(null)
+        }
     }
 
     /**
@@ -82,13 +84,18 @@ class MainFragment: Fragment(), OnProductClickListener {
      * Pinta la lista de productos en pantalla
      * @param productList Lista de productos que serán mostrados en la lista
      */
-    private fun drawList(productList: List<ProductModel>){
-        if (productList.isEmpty()){
+    private fun drawList(productList: List<ProductModel>?){
+        if (productList.isNullOrEmpty()){
+            products.clear()
+            adapter.notifyDataSetChanged()
             binding.textViewNoProducts.isVisible = true
+            binding.floatingButton.isVisible = false
         }else{
             binding.textViewNoProducts.isVisible = false
             products.addAll(productList)
             adapter.notifyDataSetChanged()
+
+            binding.floatingButton.isVisible = true
         }
     }
 

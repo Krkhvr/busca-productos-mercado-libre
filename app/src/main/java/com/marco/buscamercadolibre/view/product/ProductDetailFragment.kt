@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.viewpager2.widget.ViewPager2
+import com.marco.buscamercadolibre.R
 import com.marco.buscamercadolibre.databinding.FragmentProductDetailBinding
 import com.marco.buscamercadolibre.model.product.AttributeModel
 import com.marco.buscamercadolibre.model.product.PictureModel
