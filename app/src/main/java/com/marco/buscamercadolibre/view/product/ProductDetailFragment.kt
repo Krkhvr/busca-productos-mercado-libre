@@ -1,9 +1,11 @@
 package com.marco.buscamercadolibre.view.product
 
+import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.text.Html
+import android.text.Spanned
+import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -14,10 +16,13 @@ import com.marco.buscamercadolibre.model.product.AttributeModel
 import com.marco.buscamercadolibre.model.product.PictureModel
 import com.marco.buscamercadolibre.model.product.ProductModel
 import com.marco.buscamercadolibre.viewmodel.SharedViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 /**
  * Fragment que muestra los detalles de un producto seleccionado
  */
+@AndroidEntryPoint
 class ProductDetailFragment : Fragment() {
 
     private var _binding: FragmentProductDetailBinding? = null
@@ -26,7 +31,7 @@ class ProductDetailFragment : Fragment() {
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
     private lateinit var adapter: ProductDetailAdapter
-    private val pictures = mutableListOf<PictureModel>()
+    @Inject lateinit var pictureList: ArrayList<PictureModel>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,12 +46,18 @@ class ProductDetailFragment : Fragment() {
         init()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
+    }
+
     /**
      * Configuraciones iniciales del fragment
      */
     private fun init(){
+        setHasOptionsMenu(true)
+
         //Adapter
-        adapter = ProductDetailAdapter(pictures)
+        adapter = ProductDetailAdapter(pictureList)
         binding.viewPagerPictures.adapter = adapter
         binding.viewPagerPictures.orientation = ViewPager2.ORIENTATION_HORIZONTAL
 
@@ -54,6 +65,15 @@ class ProductDetailFragment : Fragment() {
         sharedViewModel.selected.observe(viewLifecycleOwner, Observer {
             drawProduct(it)
         })
+
+        //ClickListeners
+        binding.buttonBuyNow.setOnClickListener {
+            Toast.makeText(context, getString(R.string.product_purchased), Toast.LENGTH_SHORT).show()
+        }
+
+        binding.buttonAddToCar.setOnClickListener {
+            Toast.makeText(context, getString(R.string.product_added_to_car), Toast.LENGTH_SHORT).show()
+        }
     }
 
     /**
@@ -64,10 +84,10 @@ class ProductDetailFragment : Fragment() {
         binding.textViewId.text = product.id
         binding.textViewStatus.text = product.status
         binding.textViewDomain.text = product.domainId
-        binding.textViewFeatures.text = getFeatures(product.attributeModel)
+        binding.textViewFeatures.text = convertToHtml(getFeatures(product.attributeModel))
 
-        pictures.clear()
-        pictures.addAll(product.pictures)
+        pictureList.clear()
+        pictureList.addAll(product.pictures)
         adapter.notifyDataSetChanged()
     }
 
@@ -79,8 +99,17 @@ class ProductDetailFragment : Fragment() {
     private fun getFeatures(attributeModel: List<AttributeModel>): String{
         var features = ""
         attributeModel.forEach {
-            features+="${it.name}: ${it.value}\n"
+            //features+="> ${it.name}: ${it.value}\n"
+            features+= "<font color=#3483FA><b>> </b></font>${it.name}: ${it.value}<br>"
         }
         return features
+    }
+
+    private fun convertToHtml(features: String): Spanned {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Html.fromHtml(features, Html.FROM_HTML_MODE_COMPACT)
+        } else {
+            Html.fromHtml(features)
+        }
     }
 }

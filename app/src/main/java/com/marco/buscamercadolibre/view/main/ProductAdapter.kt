@@ -10,7 +10,7 @@ import com.squareup.picasso.Picasso
 /**
  * Clase Adapter para crear una lista personalizada de productos
  */
-class ProductAdapter(private var productsList:List<ProductModel>, private val onProductClickListener: OnProductClickListener): RecyclerView.Adapter<ProductAdapter.ProductHolder>() {
+class ProductAdapter(private var productsList:ArrayList<ProductModel>, private val onProductClickListener: OnProductClickListener): RecyclerView.Adapter<ProductAdapter.ProductHolder>() {
 
     private val TAG = "ProductAdapter"
 

@@ -13,8 +13,10 @@
     <dimen name="no_products">28sp</dimen>
 
     <!--ProductDetailFragment-->
-    <dimen name="margin_separator">10dp</dimen>
+    <dimen name="margin_separator">20dp</dimen>
     <dimen name="detail_label">16sp</dimen>
     <dimen name="features_label">16sp</dimen>
+    <dimen name="button_margin_top">20dp</dimen>
+    <dimen name="button_margin">15dp</dimen>
 
 </resources>

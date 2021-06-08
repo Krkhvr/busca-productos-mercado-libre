@@ -1,10 +1,8 @@
 package com.marco.buscamercadolibre.view.fav
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import com.marco.buscamercadolibre.databinding.FragmentFavBinding
 
 /**
@@ -22,5 +20,21 @@ class FavFragment : Fragment() {
     ): View {
         _binding = FragmentFavBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        init()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
+    }
+
+    /**
+     * Configuraciones iniciales del fragment
+     */
+    private fun init() {
+        setHasOptionsMenu(true)
     }
 }

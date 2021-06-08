@@ -15,6 +15,10 @@
     <string name="status_label">Estatus: </string>
     <string name="domain_label">Dominio: </string>
     <string name="features_label">Características</string>
+    <string name="buy_button">Comprar ahora</string>
+    <string name="add_button">Agregar al carrito</string>
+    <string name="product_purchased">Producto comprado correctamente</string>
+    <string name="product_added_to_car">Producto agregado al carrito</string>
 
     <!--FavFragment-->
     <string name="no_favs">Sin favoritos</string>

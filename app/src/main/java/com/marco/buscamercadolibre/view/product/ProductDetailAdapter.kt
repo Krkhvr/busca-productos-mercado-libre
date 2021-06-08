@@ -10,7 +10,7 @@ import com.squareup.picasso.Picasso
 /**
  * Clase Adapter para mostrar un carrete de imágenes de un producto específico
  */
-class ProductDetailAdapter(private var pictures:List<PictureModel>): RecyclerView.Adapter<ProductDetailAdapter.ProductDetailHolder>() {
+class ProductDetailAdapter(private var pictures:ArrayList<PictureModel>): RecyclerView.Adapter<ProductDetailAdapter.ProductDetailHolder>() {
 
     private val TAG = "ProductAdapter"
 

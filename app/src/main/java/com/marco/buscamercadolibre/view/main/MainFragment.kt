@@ -14,10 +14,13 @@ import com.marco.buscamercadolibre.databinding.FragmentMainBinding
 import com.marco.buscamercadolibre.model.product.ProductModel
 import com.marco.buscamercadolibre.viewmodel.ProductViewModel
 import com.marco.buscamercadolibre.viewmodel.SharedViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 /**
  * Fragment principal de la aplicación, se encarga de mostrar la lista de productos para una nueva búsqueda
  */
+@AndroidEntryPoint
 class MainFragment: Fragment(), OnProductClickListener {
 
     private var _binding: FragmentMainBinding? = null
@@ -27,7 +30,9 @@ class MainFragment: Fragment(), OnProductClickListener {
     private val sharedViewModel: SharedViewModel by activityViewModels()
 
     private lateinit var adapter: ProductAdapter
-    private val products = mutableListOf<ProductModel>()
+    @Inject lateinit var products: ArrayList<ProductModel>
+
+    //private val products = mutableListOf<ProductModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,7 +45,7 @@ class MainFragment: Fragment(), OnProductClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        unitView()
+        unitView(view)
         configObservers()
     }
 
@@ -53,7 +58,7 @@ class MainFragment: Fragment(), OnProductClickListener {
     /**
      * Configuración inicial del fragment
      */
-    private fun unitView(){
+    private fun unitView(view: View){
         adapter = ProductAdapter(products, this)
         val orientation = binding.root.resources.configuration.orientation
         if(orientation == Configuration.ORIENTATION_PORTRAIT)

@@ -70,6 +70,7 @@ class MainActivity : AppCompatActivity() {
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         (menu.findItem(R.id.main_menu_search).actionView as SearchView).apply {
             setSearchableInfo(searchManager.getSearchableInfo(componentName))
+            //queryHint = getString(R.string.search_hint)
         }
         return true
     }
@@ -102,14 +103,4 @@ class MainActivity : AppCompatActivity() {
 
 
 //TODO Pruebas unitarias
-//TODO Ocultar barra de bpusqueda en fragments heredados
-//TODO Borrar texto de buscador
-//TODO Mejorar comportamiento de SearchView
-
-
-//TODO Implementar boton de fav
-//TODO Funcionalidad de lista de favs (Agregar otro Fragment)
-//TODO Compartir producto
-//TODO Implementar ROM
-//TODO Implementar caché
 

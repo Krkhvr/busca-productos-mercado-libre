@@ -9,5 +9,10 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#F1F1F1</color>
 
+    <!--App-->
     <color name="yellow_base">#FFE500</color>
+
+    <!--Buttons-->
+    <color name="blue_buy_button">#3483FA</color>
+    <color name="blue_add_button">#E3EDFB</color>
 </resources>
