@@ -14,11 +14,13 @@ import com.marco.buscamercadolibre.databinding.FragmentMainBinding
 import com.marco.buscamercadolibre.model.product.ProductModel
 import com.marco.buscamercadolibre.viewmodel.ProductViewModel
 import com.marco.buscamercadolibre.viewmodel.SharedViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * Fragment principal de la aplicación, se encarga de mostrar la lista de productos para una nueva búsqueda
  */
-class MainFragment : Fragment(), OnProductClickListener {
+@AndroidEntryPoint
+class MainFragment: Fragment(), OnProductClickListener {
 
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
@@ -40,7 +42,8 @@ class MainFragment : Fragment(), OnProductClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        init()
+        unitView()
+        configObservers()
     }
 
     override fun onProductClicked(product:ProductModel) {
@@ -52,8 +55,7 @@ class MainFragment : Fragment(), OnProductClickListener {
     /**
      * Configuración inicial del fragment
      */
-    private fun init(){
-        //Adapter
+    private fun unitView(){
         adapter = ProductAdapter(products, this)
         val orientation = binding.root.resources.configuration.orientation
         if(orientation == Configuration.ORIENTATION_PORTRAIT)
@@ -61,8 +63,12 @@ class MainFragment : Fragment(), OnProductClickListener {
         else
             binding.recyclerView.layoutManager = StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL)
         binding.recyclerView.adapter = adapter
+    }
 
-        //Observe
+    /**
+     * Configura los Observe de la aplicación
+     */
+    private fun configObservers() {
         productViewModel.productLiveData.observe(viewLifecycleOwner, {
             drawList(it.products)
         })

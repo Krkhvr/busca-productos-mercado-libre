@@ -14,10 +14,12 @@ import androidx.navigation.ui.*
 import com.marco.buscamercadolibre.R
 import com.marco.buscamercadolibre.databinding.ActivityMainBinding
 import com.marco.buscamercadolibre.viewmodel.ProductViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 /**
  * Activity principal de la aplicación, funciona como contenedor de todos los fragments.
  */
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -80,7 +82,6 @@ class MainActivity : AppCompatActivity() {
      * Configuración inicial de la vista
      */
     private fun init(){
-        //NavigationDrawer
         val navController = findNavController(R.id.fragment_container_view_menu)
         appBarConfiguration = AppBarConfiguration(
             setOf(
@@ -93,7 +94,6 @@ class MainActivity : AppCompatActivity() {
 }
 
 
-//TODO Implementar dagger
 //TODO Implementar ROM
 //TODO Implementar caché
 //TODO Pruebas unitarias

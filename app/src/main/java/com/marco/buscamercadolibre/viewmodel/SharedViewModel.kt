@@ -3,6 +3,7 @@ package com.marco.buscamercadolibre.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.marco.buscamercadolibre.model.product.ProductModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 
 /**
  * Clase ViewModal para compartir valores entre fragments.
