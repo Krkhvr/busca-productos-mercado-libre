@@ -4,6 +4,7 @@ import android.os.Build
 import android.os.Bundle
 import android.text.Html
 import android.text.Spanned
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -25,6 +26,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class ProductDetailFragment : Fragment() {
 
+    private val TAG = "ProductDetailFragment"
+
     private var _binding: FragmentProductDetailBinding? = null
     private val binding get() = _binding!!
 
@@ -32,6 +35,7 @@ class ProductDetailFragment : Fragment() {
 
     private lateinit var adapter: ProductDetailAdapter
     @Inject lateinit var pictureList: ArrayList<PictureModel>
+    //@Inject lateinit var onSlideListenerImp: OnSlideListenerImp
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,6 +64,12 @@ class ProductDetailFragment : Fragment() {
         adapter = ProductDetailAdapter(pictureList)
         binding.viewPagerPictures.adapter = adapter
         binding.viewPagerPictures.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        binding.viewPagerPictures.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback(){
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                updateCounter(position)
+            }
+        })
 
         //Observe
         sharedViewModel.selected.observe(viewLifecycleOwner, Observer {
@@ -74,6 +84,15 @@ class ProductDetailFragment : Fragment() {
         binding.buttonAddToCar.setOnClickListener {
             Toast.makeText(context, getString(R.string.product_added_to_car), Toast.LENGTH_SHORT).show()
         }
+    }
+
+    /**
+     * Actualiza el indice de la imagen mostrado en el carrete
+     * @param position Indice de la imagen
+     */
+    fun updateCounter(position: Int) {
+        val counter = "${position+1}/${pictureList.size}"
+        binding.textViewCounter.text = counter
     }
 
     /**
@@ -99,12 +118,15 @@ class ProductDetailFragment : Fragment() {
     private fun getFeatures(attributeModel: List<AttributeModel>): String{
         var features = ""
         attributeModel.forEach {
-            //features+="> ${it.name}: ${it.value}\n"
             features+= "<font color=#3483FA><b>> </b></font>${it.name}: ${it.value}<br>"
         }
         return features
     }
 
+    /**
+     * Parsea una cadena para darle formato html
+     * @return Devuelve un texto enriquecido
+     */
     private fun convertToHtml(features: String): Spanned {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             Html.fromHtml(features, Html.FROM_HTML_MODE_COMPACT)

@@ -4,7 +4,7 @@ import com.marco.buscamercadolibre.model.product.ProductModel
 import javax.inject.Inject
 
 /***
- * Clase que implementa el evento OnClick para un elemento de la lista de productos
+ * Clase que gestiona la interface de evento OnClick para un elemento de la lista de productos
  */
 class OnProductClickListenerImp @Inject constructor(private val onProductClickListener: OnProductClickListener){
 

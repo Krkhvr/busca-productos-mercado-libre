@@ -1,6 +1,6 @@
 <resources>
     <dimen name="text_margin">16dp</dimen>
-    <dimen name="item_padding">15dp</dimen>
+    <dimen name="item_padding">20dp</dimen>
     <dimen name="description_label">16sp</dimen>
 
     <!-- Nav Header -->
@@ -13,10 +13,14 @@
     <dimen name="no_products">28sp</dimen>
 
     <!--ProductDetailFragment-->
+    <dimen name="scrollview_padding">15dp</dimen>
     <dimen name="margin_separator">20dp</dimen>
     <dimen name="detail_label">16sp</dimen>
     <dimen name="features_label">16sp</dimen>
     <dimen name="button_margin_top">20dp</dimen>
     <dimen name="button_margin">15dp</dimen>
+    <dimen name="counter_text_size">14sp</dimen>
+    <dimen name="counter_view_size">45dp</dimen>
+    <dimen name="counter_margin">10dp</dimen>
 
 </resources>
