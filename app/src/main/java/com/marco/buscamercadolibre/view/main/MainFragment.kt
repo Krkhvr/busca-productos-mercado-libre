@@ -2,6 +2,7 @@ package com.marco.buscamercadolibre.view.main
 
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +24,8 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainFragment: Fragment(), OnProductClickListener {
 
+    private val TAG = "MainFragment"
+
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
@@ -31,8 +34,6 @@ class MainFragment: Fragment(), OnProductClickListener {
 
     private lateinit var adapter: ProductAdapter
     @Inject lateinit var products: ArrayList<ProductModel>
-
-    //private val products = mutableListOf<ProductModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,7 +46,7 @@ class MainFragment: Fragment(), OnProductClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        unitView(view)
+        initView()
         configObservers()
     }
 
@@ -58,7 +59,7 @@ class MainFragment: Fragment(), OnProductClickListener {
     /**
      * Configuración inicial del fragment
      */
-    private fun unitView(view: View){
+    private fun initView(){
         adapter = ProductAdapter(products, this)
         val orientation = binding.root.resources.configuration.orientation
         if(orientation == Configuration.ORIENTATION_PORTRAIT)
@@ -73,10 +74,12 @@ class MainFragment: Fragment(), OnProductClickListener {
      */
     private fun configObservers() {
         productViewModel.productLiveData.observe(viewLifecycleOwner, {
+            Log.i(TAG, "Se llamada productLiveData")
             drawList(it.products)
         })
 
         productViewModel.pbLiveData.observe(viewLifecycleOwner, {
+            Log.i(TAG, "Se llamada pbLiveData")
             showPB(it)
         })
     }
@@ -92,6 +95,7 @@ class MainFragment: Fragment(), OnProductClickListener {
             binding.textViewNoProducts.isVisible = true
         }else{
             binding.textViewNoProducts.isVisible = false
+            products.clear()
             products.addAll(productList)
             adapter.notifyDataSetChanged()
         }

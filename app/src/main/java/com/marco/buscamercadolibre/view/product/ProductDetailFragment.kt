@@ -4,7 +4,6 @@ import android.os.Build
 import android.os.Bundle
 import android.text.Html
 import android.text.Spanned
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -12,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.viewpager2.widget.ViewPager2
 import com.marco.buscamercadolibre.R
+import com.marco.buscamercadolibre.common.Utility
 import com.marco.buscamercadolibre.databinding.FragmentProductDetailBinding
 import com.marco.buscamercadolibre.model.product.AttributeModel
 import com.marco.buscamercadolibre.model.product.PictureModel
@@ -35,7 +35,6 @@ class ProductDetailFragment : Fragment() {
 
     private lateinit var adapter: ProductDetailAdapter
     @Inject lateinit var pictureList: ArrayList<PictureModel>
-    //@Inject lateinit var onSlideListenerImp: OnSlideListenerImp
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -103,35 +102,12 @@ class ProductDetailFragment : Fragment() {
         binding.textViewId.text = product.id
         binding.textViewStatus.text = product.status
         binding.textViewDomain.text = product.domainId
-        binding.textViewFeatures.text = convertToHtml(getFeatures(product.attributeModel))
+        binding.textViewFeatures.text = Utility.convertTextToHtml(Utility.getFeatures(product.attributeModel))
 
         pictureList.clear()
         pictureList.addAll(product.pictures)
         adapter.notifyDataSetChanged()
     }
 
-    /**
-     * Construye una lista de atributos de un producto para poder mostrarlos en pantalla en un solo [TextView]
-     * @param attributeModel Lista de atributos del producto
-     * @return Devueve una cadena concatenada con todos los atributos del producto
-     */
-    private fun getFeatures(attributeModel: List<AttributeModel>): String{
-        var features = ""
-        attributeModel.forEach {
-            features+= "<font color=#3483FA><b>> </b></font>${it.name}: ${it.value}<br>"
-        }
-        return features
-    }
 
-    /**
-     * Parsea una cadena para darle formato html
-     * @return Devuelve un texto enriquecido
-     */
-    private fun convertToHtml(features: String): Spanned {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            Html.fromHtml(features, Html.FROM_HTML_MODE_COMPACT)
-        } else {
-            Html.fromHtml(features)
-        }
-    }
 }
